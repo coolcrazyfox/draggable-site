@@ -19,14 +19,27 @@ function _createModal(options){
             </div>
         </div>
     `)
+    document.body.appendChild(modal)
     return modal
 }
 
 $.modal = function (options){
+    const ANIMATION_SPEED = 200
     const $modal = _createModal(options)
+    let closing = false
     return {
-        open(){},
-        close(){},
+        open(){
+            !closing && $modal.classList.add('open')
+        },
+        close(){
+            closing = true
+            $modal.classList.remove('open')
+            $modal.classList.add('hide')
+            setTimeout(()=>{
+                $modal.classList.remove('hide')
+                closing = false
+            },ANIMATION_SPEED)
+        },
         destroy(){}
     }
 }
