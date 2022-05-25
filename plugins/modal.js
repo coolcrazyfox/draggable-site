@@ -1,3 +1,15 @@
+Element.prototype.appendAfter = function (element){
+    element.parentNode.insertBefore(this, element.nextSibling)
+}
+function _createModalFooter(buttons=[]){
+    if (buttons.length === 0) {
+        return document.createElement('div')
+    }
+    const wrap = document.createElement('div')
+    wrap.classList.add('modalFooter')
+    return wrap
+}
+
 function _createModal(options) {
     const DEFAULT_WIDTH = '600px'
     const modal = document.createElement('div')
@@ -11,14 +23,13 @@ function _createModal(options) {
                 </div>
                 <div class="modalBody" data-content>
                     ${options.content || ''}              
-                </div>
-                <div class="modalFooter">
-                    <button>Ok</button>
-                    <button>Cancel</button>                
-                </div>
+                </div>                
             </div>
         </div>
     `)
+    const footer = _createModalFooter(options.footerButtons)
+    footer.appendAfter(modal.querySelector('[data-content]'))
+
     document.body.appendChild(modal)
     return modal
 }
