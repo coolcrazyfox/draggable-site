@@ -9,7 +9,29 @@
 .modalWindow{
     width: 600px;
     border-radius: 3px;
-    background: bisque;
+    background: #e1e1e1;
     margin: 100px auto;
-    height: 200px;
+
+}
+.modalHeader{
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #8ae5d0;
+}
+.modalTitle{
+    font-size: 1.5rem;
+}
+.modalClose{
+    cursor: pointer;
+}
+.modalBody{
+    padding: 10px;
+}
+.modalBody p{
+    margin: 0 0 5px;
+}
+.modalFooter{
+    padding: 5px 10px;
+    border-top: 1px solid #8ae5d0;
 }
