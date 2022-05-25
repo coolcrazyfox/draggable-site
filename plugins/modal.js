@@ -1,4 +1,4 @@
-function _createModal(options){
+function _createModal(options) {
     const DEFAULT_WIDTH = '600px'
     const modal = document.createElement('div')
     modal.classList.add('firstModal')
@@ -9,7 +9,7 @@ function _createModal(options){
                     <span class="modalTitle">${options.title || "Window"}</span>
                     ${options.closable ? `<span class="modalClose" data-close="true">&times;</span>` : ''}
                 </div>
-                <div class="modalBody">
+                <div class="modalBody" data-content>
                     ${options.content || ''}              
                 </div>
                 <div class="modalFooter">
@@ -23,29 +23,47 @@ function _createModal(options){
     return modal
 }
 
-$.modal = function (options){
+$.modal = function (options) {
     const ANIMATION_SPEED = 200
     const $modal = _createModal(options)
     let closing = false
+    let destroyed = false
     const modal = {
-        open(){
+        open() {
+            if (destroyed) {
+                return
+            }
             !closing && $modal.classList.add('open')
         },
-        close(){
+        close() {
             closing = true
             $modal.classList.remove('open')
             $modal.classList.add('hide')
-            setTimeout(()=>{
+            setTimeout(() => {
                 $modal.classList.remove('hide')
                 closing = false
-            },ANIMATION_SPEED)
+            }, ANIMATION_SPEED)
         },
     }
+    const listener = e => {
+        if (e.target.dataset.close) {
+            modal.close()
+        }
+    }
 
-    $modal.addEventListener('click', ev =>{
+    $modal.addEventListener('click', ev => {
         if (ev.target.dataset.close) {
             modal.close()
         }
     })
-    return modal
+    return Object.assign(modal, {
+        destroy() {
+            $modal.parentNode.removeChild($modal)
+            $modal.removeEventListener('click', listener)
+            destroyed = true
+        },
+        setContent(html) {
+            $modal.querySelector('[data-content]').innerHTML = html
+        }
+    })
 }
