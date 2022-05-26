@@ -52,7 +52,7 @@ const testImage= [
     {id:3, title: '3', message:'text3', img: 'img/51.jpg'},
 ]
 const toHTML=(testImage)=>`
-    <div class="gallery__item"><img src="${testImage.img}" alt="${testImage.title}"></div>`
+    <div class="gallery__item"><img src="${testImage.img}" alt="${testImage.title}" data-btn="message"></div>`
 
 
 function render(){
@@ -77,4 +77,11 @@ const modal = $.modal({
                 modal.close()
             }}
     ]
+})
+document.addEventListener('click', event=>{
+    event.preventDefault()
+    const btnType=event.target.dataset.btn
+    if (btnType==='message'){
+        modal.open()
+    }
 })
