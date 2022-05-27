@@ -37,7 +37,7 @@
 }
 .modalWindow{
     width: 600px;
-    border-radius: 3px;
+    border-radius: 4px;
     background: #e1e1e1;
     margin: 0 auto;
     transform: translateY(-200px);
@@ -48,7 +48,8 @@
     padding: 5px 10px;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #8ae5d0;
+    border-bottom: 1px solid #e5b38a;
+    background: #f8d2b5;
 }
 .modalTitle{
     font-size: 1.5rem;
@@ -64,5 +65,5 @@
 }
 .modalFooter{
     padding: 5px 10px;
-    border-top: 1px solid #8ae5d0;
+    /*border-top: 1px solid #8ae5d0;*/
 }

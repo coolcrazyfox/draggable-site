@@ -5,6 +5,9 @@ $.confirm = function (options) {
             width: '400px',
             closable: false,
             content: options.content,
+            onClose(){
+                modal.destroy()
+            },
             footerButtons: [
                 {text: 'Cancel', type: 'secondary', handler() {
                         modal.close()
@@ -16,6 +19,6 @@ $.confirm = function (options) {
                 }}
             ]
         })
-        modal.open()
+        setTimeout(()=> modal.open(), 100)
     })
 }
