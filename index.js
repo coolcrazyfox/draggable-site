@@ -52,11 +52,12 @@ const testImage = [
     // {id: 51, title: '356', message: 'text30', img: 'img/51.jpg'},
 ]
 const toHTML = image => `
-    <div class="gallery__item">        
-        <img src="${image.img}" 
+    <div class="gallery__item">
+        <span data-btn="remove" data-id="${image.id}">x<img src="${image.img}" 
         alt="${image.title}"
          data-btn="message" 
-         data-id="${image.id}">         
+         data-id="${image.id}"></span>        
+               
     </div>`
 
 function render() {
@@ -84,15 +85,42 @@ const nameHotelModal = $.modal({
         //     }}
     ]
 })
+const confirmModal = $.modal({
+    title: 'Are you sure ?',
+    closable: true,
+    width: '400px',
+    footerButtons: [
+        {
+            text: 'Close', type: 'secondary', handler() {
+                confirmModal.close()
+            }
+        },
+        {
+            text: 'Delete', type: 'danger', handler() {
+                confirmModal.close()
+            }
+        }
+    ]
+})
 document.addEventListener('click', event => {
     event.preventDefault()
     const btnType = event.target.dataset.btn
     const id = +event.target.dataset.id
+    const image = testImage.find(i => i.id === id)
 
     if (btnType === 'message') {
-        const image = testImage.find(i => i.id === id)
         nameHotelModal.setContent(`
         <p>Hotel ${image.title}: <strong>${image.message}</strong></p>`)
         nameHotelModal.open()
+    }
+    else if (btnType === 'remove'){
+        $.confirm({
+            title: 'Are you sure?',
+            content: `<p>The hotel: <strong>${image.title}</strong> will be delete</p>`
+        }).then(()=>{
+            alert(`${image.title}`)
+        }).catch(()=>{
+            alert('error')
+        })
     }
 })
