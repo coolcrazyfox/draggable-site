@@ -49,11 +49,6 @@ body {
 .gallery__item:hover {
 	transform: scale(1.03);
 }
-.gallery__item a {
-	width: 100%;
-	display: block;
-	background: #8ae5d0;
-}
 .gallery__item img {
 	width: 100%;
 	display: block;

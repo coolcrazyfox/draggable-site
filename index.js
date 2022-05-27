@@ -60,28 +60,27 @@ function render(){
     document.querySelector('#testImage').innerHTML= html
 }
 render()
-const modal = $.modal({
-    title:'My modal',
+const nameHotelModal = $.modal({
+    title:'Hotels',
     closable: true,
-    content:`
-    <h4>Modal is working</h4> 
-    <p>Lorem ipsum dolor sit amet, consectetur.</p>`,
+    // content:`
+    // <h4>Modal is working</h4>
+    // <p>Lorem ipsum dolor sit amet, consectetur.</p>`,
     width: '400px',
     footerButtons: [
         {text: 'Ok', type: 'primary', handler(){
-                console.log('Primary btn clicked')
-                modal.close()
+                nameHotelModal.close()
             }},
-        {text: 'Cancel', type: 'danger', handler(){
-                console.log('Danger btn clicked')
-                modal.close()
-            }}
+        // {text: 'Cancel', type: 'danger', handler(){
+        //         console.log('Danger btn clicked')
+        //         nameHotelModal.close()
+        //     }}
     ]
 })
 document.addEventListener('click', event=>{
     event.preventDefault()
     const btnType=event.target.dataset.btn
     if (btnType==='message'){
-        modal.open()
+        nameHotelModal.open()
     }
 })
